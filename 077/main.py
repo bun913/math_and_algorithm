@@ -1,21 +1,25 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+これも問題076と同じく足される数を考える
+まずXとYは分けて考えて良い
+かつ、X・Yそれぞれの点とのマンハッタン距離を測る
+つまり配列をソートしても結果に変わりはなし
 """
+N = int(input())
+X = []
+Y = []
 
+for _ in range(N):
+    x,y = list(map(int, input().split()))
+    X.append(x)
+    Y.append(y)
+
+xd = sorted(X, reverse=True)
+yd = sorted(Y, reverse=True)
+ans = 0
+
+for i in range(N):
+    x = xd[i]
+    y = yd[i]
+    ans += (N-2*i-1) * x
+    ans += (N-2*i-1) * y
+print(ans)
