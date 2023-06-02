@@ -1,21 +1,16 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+i番目の整数Aiについてi%Aiを足し合わせていき最大値を求める
+全探索では間に合わないので、傾向を掴むために全探索で最大値を求める
+すると以下のような性質がある
+N: Miの合計とする
+1: 0
+2: 1
+3: 3
+4: 6
+5: 10
+6: 15
+ということでNからMiの合計値を求める式は以下のようになる。
 """
-
+N = int(input())
+ans = N * (N-1) // 2
+print(ans)
