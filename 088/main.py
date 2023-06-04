@@ -1,21 +1,11 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+3つの整数A,B、Cが与えられる
+(1,2,...A) * (1,2,..,B) * (1,2,...,C)という式に置き換えられる
 """
-
+A, B, C = list(map(int, input().split()))
+mod = 998244353
+a = (1 + A) * A // 2 % mod
+b = (1 + B) * B // 2 % mod
+c = (1 + C) * C // 2 % mod
+ans = a * b * c % mod
+print(ans)
