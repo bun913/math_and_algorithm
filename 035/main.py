@@ -1,21 +1,39 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+中心間の距離で2つの円の重なり具合を5つに分類できる
+1: 一方の円が他方の円を完全に含んでいて、2つの円は接していない
+d < abs(r1-r2)
+2: 一方の縁が他方の円を含み、2つの円は接している
+d = abs(r1-r2)
+3: 2つの円は交わっている
+abs(r1-r2) < d < r1+r2
+4: 一方の縁が他方の円を含み、2つの円は接していない
+d = r1+r2
+5: 一方の円が他方の円を完全に含んでいて、2つの円は接している
+d > r1+r2
 """
+x1, y1 ,r1 = list(map(int, input().split()))
+x2, y2 ,r2 = list(map(int, input().split()))
+
+# 全部2乗したままで比較していく
+d = ((x1 - x2) ** 2 + (y1 - y2) ** 2)
+# パターン1
+if d < (r1 - r2) ** 2:
+    print(1)
+    exit()
+# パターン2
+if d == (r1 - r2) ** 2:
+    print(2)
+    exit()
+# パターン3
+if (r1 - r2) ** 2 < d < (r1 + r2) ** 2:
+    print(3)
+    exit()
+# パターン4
+if d == (r1 + r2) ** 2:
+    print(4)
+    exit()
+# パターン5
+if (r1 + r2) ** 2 < d:
+    print(5)
+    exit()
 
