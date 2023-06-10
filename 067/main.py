@@ -1,21 +1,16 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+まずH行の和を配列hsumに格納する
+次のW列の和をそれぞれ配列wsumに格納する
 """
-
+H, W = map(int, input().split())
+A = [list(map(int, input().split())) for _ in range(H)]
+hsum = [0] * H
+for i in range(H):
+    hsum[i] = sum(A[i])
+wsum = [sum(col) for col in zip(*A)]
+for i in range(H):
+    row = []
+    for j in range(W):
+        col = hsum[i] + wsum[j] - A[i][j]
+        row.append(col)
+    print(*row)
