@@ -1,21 +1,19 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
 """
-
+N, X, Y = map(int, input().split())
+if Y > N ** 4:
+    print("No")
+    exit()
+# Yの約数を列挙する
+divisors = []
+for i in range(1, N + 1):
+    if Y % i == 0:
+        divisors.append(i)
+for i in range(len(divisors)):
+    for j in range(i,len(divisors)):
+        for k in range(j,len(divisors)):
+            for l in range(k,len(divisors)):
+                if divisors[i] + divisors[j] + divisors[k] + divisors[l] == X:
+                    print("Yes")
+                    exit()
+print("No")
