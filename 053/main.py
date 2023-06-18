@@ -1,21 +1,16 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+普通に計算したら間に合わない
+これは初項が1,N項まである等比数列となっている、項比は4
+等比数列の和の公式を当てると
+a*(r**n -1)//(r-1)
+となるのでこれを使う
 """
-
+N = int(input())
+n = N + 1
+mod = 10**9 + 7
+#分子
+den = pow(4,n,mod) - 1 % mod
+# 分母は3
+# 逆元で答えを求める
+ans = den * pow(3, mod-2, mod) % mod
+print(ans)
