@@ -1,21 +1,19 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
 """
+def gcd(a,b):
+    # xを大きい方としたい
+    x, y = a, b
+    # ガードケース
+    if x == 0 or y == 0:
+        return max(x,y)
+    if x <= y:
+        x, y = y, x
+    return gcd(y, x%y)
 
+A, B = map(int, input().split())
+g = gcd(A,B)
+lcm = A * B // g
+if lcm > 10 ** 18:
+    print("Large")
+    exit()
+print(lcm)
