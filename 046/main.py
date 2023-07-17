@@ -1,21 +1,42 @@
-"""
-Atcoderの問題解く用
+from collections import deque
 
-1行1列データ
+R, C = map(int, input().split())
+sx, sy = map(int, input().split())
+sx -= 1
+sy -= 1
+gx, gy = map(int, input().split())
+gx -= 1
+gy -= 1
+maze = [list(input()) for _ in range(R)]
 
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
+G = [[] for _ in range(R*C)]
+dxy = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+# グラフを作成
+for i in range(R):
+    for j in range(C):
+        if maze[i][j] == '#':
+            continue
+        idx1 = i*C + j
+        for dx, dy in dxy:
+            idx2 = (i+dx)*C + (j+dy)
+            if 0 <= i+dx < R and 0 <= j+dy < C and maze[i+dx][j+dy] == '.':
+                G[idx1].append(idx2)
+                G[idx2].append(idx1)
+# 幅優先探索でスタートからゴールの最短距離を求める
+start = sx*C + sy
+goal = gx*C + gy
+q = deque([start])
+dist = [-1] * (R*C)
+dist[start] = 0
 
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
+while q:
+    cur = q.popleft()
+    for nex in G[cur]:
+        # 訪問済みはスキップ
+        if dist[nex] != -1:
+            continue
+        dist[nex] = dist[cur] + 1
+        q.append(nex)
 
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
-"""
-
+ans = dist[goal]
+print(ans)
