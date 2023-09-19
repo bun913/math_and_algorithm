@@ -1,21 +1,27 @@
 """
-Atcoderの問題解く用
+頂点1からKまで最短経路を出力する。
+移動不可能な場合は-1を出力する。
 
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+これぞ幅優先探索の問題って感じ
 """
+from collections import deque
 
+N,M = map(int, input().split())
+
+# グラフを作成
+G = [list() for _ in range(N)]
+for _ in range(M):
+    a, b = map(int, input().split())
+    G[a-1].append(b-1)
+    G[b-1].append(a-1)
+q = deque([0])
+
+ans = [-1 for _ in range(N)]
+ans[0] = 0
+while q:
+    pos = q.popleft()
+    for nex in G[pos]:
+        if ans[nex] == -1:
+            q.append(nex)
+            ans[nex] = ans[pos] + 1
+print(*ans, sep="\n")
