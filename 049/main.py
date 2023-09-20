@@ -1,21 +1,11 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+フィボナッチ数列を計算していくわけだけど
+Nが10**7と非常に大きいので、普通にやると桁数が大きくなりすぎる
+フィボナッチ数列はいっても足し算でもとめていくので、計算の途中であまりをとっても結果は変わらない
 """
-
+N = int(input())
+fib = [1,1]# 最初の2項目は入れておく
+for i in range(2,N):
+    nex = fib[i-1] + fib[i-2]
+    fib.append(nex%1000000007)
+print(fib[N-1])
