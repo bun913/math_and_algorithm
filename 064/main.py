@@ -1,21 +1,19 @@
 """
-Atcoderの問題解く用
-
-1行1列データ
-
-#str型で受け取るとき
-s = input() 
-#int型で受け取るとき
-s = int(input()) 
-#float型　(小数)で受け取るとき
-s = float(input())
-
-(1,N)行列データ
-s = input().split()
-# listで整数で受け取る
-l = list(map(int, input().split()))
-
-その他
-https://qiita.com/jamjamjam/items/e066b8c7bc85487c0785
+数列の数の絶対値を求める
+まずその絶対値がKの値を超える場合は無理
+またKの方が大きくても、偶奇が合わないと無理
+ちょうどK回操作しないといけないから
 """
+from functools import reduce
 
+N, K = list(map(int, input().split()))
+A = list(map(int, input().split()))
+
+abs_sum = reduce(lambda bef, cur: bef + abs(cur), A, 0)
+if abs_sum > K:
+    print('No')
+    exit()
+if abs_sum % 2 != K % 2:
+    print('No')
+    exit()
+print("Yes")
